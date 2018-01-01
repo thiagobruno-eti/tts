@@ -1,0 +1,40 @@
+<html>
+<head>
+  <script src="pixi.min.js"></script>
+  <script src="animate.js"></script>
+</head>
+<body onload="onLoad()">
+
+<div id="characterDiv" style="width:250px; height:200px;">
+</div>
+<audio id="audio"></audio>
+<br/>
+<input type="text" id="speakText">
+<a href="javascript:speak()">speak</a>
+<a href="javascript:stop()">stop</a>
+
+<script>
+function onLoad() {
+    animateInit("characterDiv", 250, 200);
+}
+function onSceneLoaded() {
+    // a good time for an initial animateSpeakQueued()
+}
+function onEmbeddedCommand(cmd) {
+    // Called when an embeded <cmd/> is reached in your animateSpeakQueued() string, e.g. <cmd target="a"/>
+    alert(JSON.stringify(cmd));
+}
+function onQueueLengthDecrease(n) {
+    // if n < 1, for example, then add another few sentences to the queue using animateSpeakQueued().
+}
+function speak() {
+	animateSpeakQueued(document.getElementById("speakText").value);
+	document.getElementById("speakText").value = "";
+}
+function stop() {
+    animateStop();
+}
+</script>
+
+</body>
+</html>
